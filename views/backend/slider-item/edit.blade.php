@@ -15,7 +15,7 @@
 @section('content')
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Create New Slider Item</div>
         <div class="panel-body">
@@ -39,6 +39,9 @@
             <div class="form-group {{ $errors->has('content') ? 'has-error': '' }} ">
               <label>Content</label>
               <textarea name="content" class="form-control" rows="8">{{ $item->content }}</textarea>
+<pre>
+<?php echo htmlspecialchars('<a href="/" class="btn btn-primary">Learn more</a>');?>
+</pre>
               @if ($errors->has('content'))
                 <span class="help-block">{{ $errors->first('content') }}</span>
               @endif
@@ -63,7 +66,7 @@
             </div>
 
             <div class="form-group">
-              <button class="btn btn-primary" type="submit">Create new</button>
+              <button class="btn btn-primary" type="submit">UPDATE</button>
             </div>
           </form>
         </div>
