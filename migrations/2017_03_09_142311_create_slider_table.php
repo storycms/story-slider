@@ -25,7 +25,8 @@ class CreateSliderTable extends Migration
             $table->integer('slider_id')->unsigned();
             $table->smallInteger('order')->default(0);
             $table->boolean('status')->default(false);
-            $table->string('media');
+            $table->string('image')->nullable();
+            $table->string('image_mobile')->nullable();
             $table->timestamps();
         });
 
@@ -35,6 +36,7 @@ class CreateSliderTable extends Migration
             $table->string('title')->nullable();
             $table->text('subtitle')->nullable();
             $table->text('content')->nullable();
+            $table->char('locale', 2)->default('en');
         });
     }
 

@@ -9,13 +9,14 @@ class SliderItem extends Model
 {
     use Translatable;
 
+    public $timestamps = false;
+
     protected $table    = 'sliders_items';
-    protected $fillable = ['slider_id', 'order', 'status', 'media'];
+    protected $fillable = ['slider_id', 'order', 'status', 'image', 'image_mobile'];
 
     public $translationModel = 'Story\Slider\Models\Translatable\SliderItemTranslation';
     public $translatedAttributes = [
-        'slug', 'title', 'body', 'meta_title', 'meta_description', 'meta_keyword',
-        'image_thumbnail', 'summary', 'link',
+        'title', 'subtitle', 'content'
     ];
 
     public function slider()

@@ -1,15 +1,20 @@
 @extends('story-theme::layouts.master')
 
-@section('title') Dashboard @stop
+@section('title') Slider @stop
 
-@section('content')
-<div class="page-header">
-  <div class="page-header-content">
-    <div class="page-title">
-      <h1>Slider</h1>
-    </div>
+@section('heading-elements')
+<div class="heading-elements">
+  <div class="heading-btn-group">
+    {{--  <a href="/backend/system/appearance/navigation/create" class="btn btn-link btn-float has-text">
+      <i class="material-icons">add_box</i> <span>ADD NEW</span>
+    </a>  --}}
   </div>
 </div>
+@stop
+
+
+@section('content')
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">

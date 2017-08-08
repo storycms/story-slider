@@ -15,35 +15,37 @@
 @section('content')
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="panel panel-default">
         <div class="panel-heading">Create New Slider Item</div>
         <div class="panel-body">
           <form class="" action="" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input type="hidden" name="_method" value="PUT" />
             <div class="form-group {{ $errors->has('title') ? 'has-error': '' }} ">
               <label>Title</label>
-              <input type="type" name="title" class="form-control">
+              <input type="type" name="title" class="form-control" value="{{ $item->title }}">
               @if ($errors->has('title'))
                 <span class="help-block">{{ $errors->first('title') }}</span>
               @endif
             </div>
             <div class="form-group {{ $errors->has('subtittle') ? 'has-error': '' }} ">
               <label>Subtittle</label>
-              <textarea name="subtitle" class="form-control" rows="8"></textarea>
+              <textarea name="subtitle" class="form-control" rows="8">{{ $item->subtitle }}</textarea>
               @if ($errors->has('subtittle'))
                 <span class="help-block">{{ $errors->first('subtittle') }}</span>
               @endif
             </div>
             <div class="form-group {{ $errors->has('content') ? 'has-error': '' }} ">
               <label>Content</label>
-              <textarea name="content" class="form-control" rows="8"></textarea>
+              <textarea name="content" class="form-control" rows="8">{{ $item->content }}</textarea>
               @if ($errors->has('content'))
                 <span class="help-block">{{ $errors->first('content') }}</span>
               @endif
             </div>
             <div class="form-group {{ $errors->has('media') ? 'has-error': '' }} ">
               <label>Image *</label>
+              {{ $item->image }}
               <input type="file" name="media" class="form-control">
               @if ($errors->has('media'))
                 <span class="help-block">{{ $errors->first('media') }}</span>
@@ -52,7 +54,8 @@
             </div>
 
             <div class="form-group {{ $errors->has('media_mobile') ? 'has-error': '' }} ">
-              <label>Video</label>
+              <label>Video *</label>
+              {{ $item->image_mobile }}
               <input type="file" name="media_mobile" class="form-control">
               @if ($errors->has('media_mobile'))
                 <span class="help-block">{{ $errors->first('media_mobile') }}</span>
@@ -65,36 +68,6 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Subtittle</th>
-            @foreach (config()->get('translatable.locales') as $locale)
-              <th>{{ $locale }}</th>
-            @endforeach
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($sliders->item as $item)
-            <tr>
-              <td>{{ $item->id }}</td>
-              <td>{{ $item->title }}</td>
-              <td>{{ $item->subtitle }}</td>
-              @foreach (config()->get('translatable.locales') as $locale)
-                <td>
-                  <a href="/backend/cms/plugins/slider/{{ $sliders->id }}/item/{{ $item->id }}?locale={{ $locale }}">
-                    {{ $locale }}
-                  </a>
-                </td>
-              @endforeach
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

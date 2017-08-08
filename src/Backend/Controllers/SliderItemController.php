@@ -2,33 +2,46 @@
 
 namespace Story\Slider\Backend\Controllers;
 
+use Illuminate\Http\Request;
 use Story\Slider\Backend\Requests\SliderRequest;
 use Story\Slider\Models\Repositories\SliderRepository;
+use Story\Slider\Models\Repositories\SliderRepositoryItem;
 
 class SliderItemController extends Controller
 {
     protected $sliders;
+    protected $items;
 
-    public function __construct(SliderRepository $sliders)
+    public function __construct(SliderRepository $sliders, SliderRepositoryItem $items)
     {
         $this->sliders = $sliders;
+        $this->items = $items;
     }
 
-    public function index()
+    public function index($id)
     {
-        $this->data['sliders'] = $this->sliders->all();
+        $sliders = $this->sliders
+            ->findById($id)
+            ->load('item', 'user');
 
-        return $this->view('slider-item.index');
+        return $this->view('slider-item.index', compact('sliders'));
     }
 
-    public function store(SliderRequest $request)
+    /**
+     * Create new slider item
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, $id)
     {
-        $slider = $this->sliders->create($request);
+        $slider = $this->sliders->findById($id);
 
-        if ($slider) {
-            session()->flash('info', 'Unable to create category');
+        if ($this->items->create($request, $slider)) {
+            session()->flash('info', 'Slider item created.');
         } else {
-            session()->flash('message', 'Unable to create category');
+            session()->flash('error', 'Unable to create slider item.');
         }
 
         return redirect()->back();
@@ -39,14 +52,41 @@ class SliderItemController extends Controller
 
     }
 
-    public function edit()
+    /**
+     * Display html form to edit slider
+     *
+     * @param Request $request
+     * @param int $id
+     * @param int $item
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, $id, $item)
     {
+        $slider = $this->sliders->findById($id);
+        $item  = $this->items->findById($item);
 
+        return $this->view('slider-item.edit', compact('item'));
     }
 
-    public function update()
+    /**
+     * Handle update request from user
+     *
+     * @param Request $request
+     * @param int $id
+     * @param int $item
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id, $item)
     {
+        $item  = $this->items->findById($item);
 
+        if ($this->items->update($request, $item)) {
+            session()->flash('info', 'Slider item is updated.');
+        } else {
+            session()->flash('info', 'Unable to update slider item.');
+        }
+
+        return redirect()->back();
     }
 
     public function destroy()
