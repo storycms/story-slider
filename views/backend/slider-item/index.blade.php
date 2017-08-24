@@ -98,6 +98,7 @@
               <td>
                 <form action="/backend/cms/plugins/slider/{{ $sliders->id }}/item/{{ $item->id }}" method="POST">
                   <input type="hidden" name="_method" value="DELETE" />
+                  {{ csrf_field() }}
                   <button type="submit">X</button>
                 </form>
               </td>
