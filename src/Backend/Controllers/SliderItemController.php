@@ -89,8 +89,24 @@ class SliderItemController extends Controller
         return redirect()->back();
     }
 
-    public function destroy()
+    /**
+     * Handle delete request from user
+     *
+     * @param  Request $request
+     * @param  int  $id
+     * @param  int $item
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, $id)
     {
+        $item = $this->items->findById($id);
 
+        if ($this->items->delete($request, $item)) {
+            session()->flash('info', 'Deleted Slider item.');
+        } else {
+            session()->flash('info', 'Unable to delete slider item.');
+        }
+
+        return redirect()->back();
     }
 }

@@ -89,4 +89,16 @@ class SliderRepositoryItem
 
         return $item->save();
     }
+
+    /**
+     * Perform delete slider item
+     *
+     * @param  Request $request
+     * @param  Slideritem $item
+     * @return boolean
+     */
+    public function delete(Request $request, Slideritem $item)
+    {
+        return $item->destroy();
+    }
 }
