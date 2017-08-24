@@ -79,6 +79,7 @@
             @foreach (config()->get('translatable.locales') as $locale)
               <th>{{ $locale }}</th>
             @endforeach
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -94,6 +95,12 @@
                   </a>
                 </td>
               @endforeach
+              <td>
+                <form action="/backend/cms/plugins/slider/{{ $sliders->id }}/item/{{ $item->id }}" method="POST">
+                  <input type="hidden" name="_method" value="DELETE" />
+                  <button type="submit">X</button>
+                </form>
+              </td>
             </tr>
           @endforeach
         </tbody>

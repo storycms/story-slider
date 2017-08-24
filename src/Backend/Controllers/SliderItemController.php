@@ -97,9 +97,9 @@ class SliderItemController extends Controller
      * @param  int $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id, $item)
     {
-        $item = $this->items->findById($id);
+        $item = $this->items->findById($item);
 
         if ($this->items->delete($request, $item)) {
             session()->flash('info', 'Deleted Slider item.');
