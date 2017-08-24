@@ -99,6 +99,6 @@ class SliderRepositoryItem
      */
     public function delete(Request $request, Slideritem $item)
     {
-        return $item->destroy();
+        return $item->delete();
     }
 }
