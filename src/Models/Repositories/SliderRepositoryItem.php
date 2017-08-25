@@ -97,7 +97,7 @@ class SliderRepositoryItem
      * @param  Slideritem $item
      * @return boolean
      */
-    public function delete(Request $request, Slideritem $item)
+    public function delete(Slideritem $item)
     {
         return $item->delete();
     }
