@@ -22,21 +22,21 @@
           <form class="" action="" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group {{ $errors->has('title') ? 'has-error': '' }} ">
-              <label>Title</label>
+              <label>Headline</label>
               <input type="type" name="title" class="form-control">
               @if ($errors->has('title'))
                 <span class="help-block">{{ $errors->first('title') }}</span>
               @endif
             </div>
             <div class="form-group {{ $errors->has('subtittle') ? 'has-error': '' }} ">
-              <label>Subtittle</label>
+              <label>Intro</label>
               <textarea name="subtitle" class="form-control" rows="8"></textarea>
               @if ($errors->has('subtittle'))
                 <span class="help-block">{{ $errors->first('subtittle') }}</span>
               @endif
             </div>
             <div class="form-group {{ $errors->has('content') ? 'has-error': '' }} ">
-              <label>Content</label>
+              <label>Button</label>
               <textarea name="content" class="form-control" rows="8"></textarea>
 <pre>
   <?php echo htmlspecialchars('<a href="/" class="btn btn-primary">Learn more</a>');?>
@@ -60,6 +60,7 @@
               @if ($errors->has('media_mobile'))
                 <span class="help-block">{{ $errors->first('media_mobile') }}</span>
               @endif
+              <span class="help-block">max size 16:9, 1920</span>
             </div>
 
             <div class="form-group">
@@ -74,11 +75,10 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Title</th>
-            <th>Subtittle</th>
-            @foreach (config()->get('translatable.locales') as $locale)
-              <th>{{ $locale }}</th>
-            @endforeach
+            <th>Headline</th>
+            <th>Intro</th>
+            <th>English</th>
+            <th>Bahasa</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -91,7 +91,7 @@
               @foreach (config()->get('translatable.locales') as $locale)
                 <td>
                   <a href="/backend/cms/plugins/slider/{{ $sliders->id }}/item/{{ $item->id }}?locale={{ $locale }}">
-                    {{ $locale }}
+                    Edit
                   </a>
                 </td>
               @endforeach
